@@ -1,13 +1,13 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.action.setBadgeText({
-    text: 'OFF',
+    text: '',
   })
 })
 
 chrome.action.onClicked.addListener(async (tab) => {
   const prevState = await chrome.action.getBadgeText({ tabId: tab.id })
 
-  const nextState = prevState === 'ON' ? 'OFF' : 'ON'
+  const nextState = prevState === 'ON' ? '' : 'ON'
 
   await chrome.action.setBadgeText({
     tabId: tab.id,
