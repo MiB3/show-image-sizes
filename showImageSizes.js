@@ -108,13 +108,13 @@ if (!('showImagesSizes' in document)) {
   }
 
   const debounce = (callback, wait) => {
-    let timeoutId = null;
+    let timeoutId = null
     return (...args) => {
-      window.clearTimeout(timeoutId);
+      window.clearTimeout(timeoutId)
       timeoutId = window.setTimeout(() => {
-        callback(...args);
-      }, wait);
-    };
+        callback(...args)
+      }, wait)
+    }
   }
 
   document.showImagesSizes = debounce(showImagesSizes, 100)
@@ -123,7 +123,9 @@ if (!('showImagesSizes' in document)) {
 // would be better to keep this state in sync with the one in background.js,
 // but I don't know how and this works as well.
 if ('showImageSizesActive' in document && document.showImageSizesActive) {
-  document.querySelectorAll(`.${document.infoDivClassName}`).forEach(e => e.remove())
+  document
+    .querySelectorAll(`.${document.infoDivClassName}`)
+    .forEach((e) => e.remove())
 
   window.removeEventListener('resize', document.showImagesSizes)
   window.removeEventListener('scroll', document.showImagesSizes)
