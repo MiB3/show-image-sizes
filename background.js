@@ -1,5 +1,3 @@
-import { showImagesSizes } from './showImageSizes.mjs';
-
 chrome.runtime.onInstalled.addListener(() => {
   chrome.action.setBadgeText({
     text: "OFF",
@@ -8,6 +6,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.action.onClicked.addListener(async (tab) => {
   const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
+
   const nextState = prevState === 'ON' ? 'OFF' : 'ON';
 
   await chrome.action.setBadgeText({
@@ -15,5 +14,8 @@ chrome.action.onClicked.addListener(async (tab) => {
     text: nextState,
   });
 
-  showImagesSizes()
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["showImageSizes.js"],
+  });
 });
