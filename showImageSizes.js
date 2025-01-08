@@ -16,9 +16,9 @@ if (!('showImagesSizes' in document)) {
       infoDiv.style.color = 'black'
       infoDiv.style.textAlign = 'left'
       infoDiv.style.maxWidth = '97%'
-      infoDiv.style.boxShadow = "4px 4px 10px gray";
-      infoDiv.style.borderBottomRightRadius = "12px";
-      infoDiv.style.zIndex = "9999";
+      infoDiv.style.boxShadow = '4px 4px 10px gray'
+      infoDiv.style.borderBottomRightRadius = '12px'
+      infoDiv.style.zIndex = '9999'
       infoDiv.classList.add(infoDivClassName)
 
       const renderedWith = img.clientWidth
@@ -39,42 +39,42 @@ if (!('showImagesSizes' in document)) {
       const infoDivColor = document.createElement('div')
       infoDivColor.style.textWrap = 'wrap'
       infoDivColor.style.padding = '10px 20px 10px 10px'
-      infoDivColor.style.borderBottomRightRadius = "10px";
+      infoDivColor.style.borderBottomRightRadius = '10px'
       const objectFitContain = getComputedStyle(img).objectFit === 'contain'
       if (loadedWidth === 0 || loadedHeight === 0) {
         infoDivColor.style.backgroundColor = '#DCDCDE'
         infoDivColor.innerHTML =
-            'Image loaded later. Resize window to recalculate.'
+          'Image loaded later. Resize window to recalculate.'
       } else if (
-          objectFitContain &&
-          loadedWidth < renderedWith &&
-          loadedHeight < renderedHeight
+        objectFitContain &&
+        loadedWidth < renderedWith &&
+        loadedHeight < renderedHeight
       ) {
         infoDivColor.innerHTML =
-            'Loaded image is too small (object-contain; height and width need to be large enough)'
+          'Loaded image is too small (object-contain; height and width need to be large enough)'
         infoDivColor.style.backgroundColor = '#DA1E28'
       } else if (
-          !objectFitContain &&
-          (loadedWidth < renderedWith || loadedHeight < renderedHeight)
+        !objectFitContain &&
+        (loadedWidth < renderedWith || loadedHeight < renderedHeight)
       ) {
         infoDivColor.innerHTML =
-            'Loaded image is too small (not object-contain; height or width need to be large enough)'
+          'Loaded image is too small (not object-contain; height or width need to be large enough)'
         infoDivColor.style.backgroundColor = '#DA1E28'
       } else if (
-          ((loadedWidth >= renderedWith && loadedWidth < renderedWith * 2) ||
-              (loadedHeight >= renderedHeight &&
-                  loadedHeight < renderedHeight * 2)) &&
-          loadedWidth * loadedHeight < renderedWith * renderedHeight * 3 // don't load 3 times more pixles than needed
+        ((loadedWidth >= renderedWith && loadedWidth < renderedWith * 2) ||
+          (loadedHeight >= renderedHeight &&
+            loadedHeight < renderedHeight * 2)) &&
+        loadedWidth * loadedHeight < renderedWith * renderedHeight * 3 // don't load 3 times more pixles than needed
       ) {
         infoDivColor.style.backgroundColor = '#92B93D'
         infoDivColor.innerHTML = 'Loaded image has the right size.'
 
         if (
-            objectFitContain &&
-            (loadedWidth < renderedWith || loadedHeight < renderedHeight)
+          objectFitContain &&
+          (loadedWidth < renderedWith || loadedHeight < renderedHeight)
         ) {
           infoDivColor.innerHTML +=
-              ' (For object-contain only width OR height need to be large enough)'
+            ' (For object-contain only width OR height need to be large enough)'
         }
       } else {
         infoDivColor.innerHTML = 'Loaded image is too big'
@@ -85,11 +85,11 @@ if (!('showImagesSizes' in document)) {
         } else if (loadedWidth >= renderedWith * 2) {
           infoDivColor.innerHTML += ' (width is double the size needed)'
         } else if (
-            loadedWidth * loadedHeight >=
-            renderedWith * renderedHeight * 3
+          loadedWidth * loadedHeight >=
+          renderedWith * renderedHeight * 3
         ) {
           infoDivColor.innerHTML +=
-              ' (number of pixels is 3 times more than needed)'
+            ' (number of pixels is 3 times more than needed)'
         }
       }
       infoDivColor.style.minHeight = '1.5em'
@@ -105,7 +105,7 @@ if (!('showImagesSizes' in document)) {
 
       if (parent) {
         const parentPosition =
-            getComputedStyle(parent).getPropertyValue('position')
+          getComputedStyle(parent).getPropertyValue('position')
         if (!['relative', 'absolute'].includes(parentPosition)) {
           parent.style.position = 'relative'
         }
@@ -130,8 +130,8 @@ if (!('showImagesSizes' in document)) {
 // but I don't know how and this works as well.
 if ('showImageSizesActive' in document && document.showImageSizesActive) {
   document
-      .querySelectorAll(`.${document.infoDivClassName}`)
-      .forEach((e) => e.remove())
+    .querySelectorAll(`.${document.infoDivClassName}`)
+    .forEach((e) => e.remove())
 
   window.removeEventListener('resize', document.showImagesSizes)
   window.removeEventListener('scroll', document.showImagesSizes)
