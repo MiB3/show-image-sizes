@@ -42,7 +42,7 @@ if (!('showImagesSizes' in document)) {
       infoDivColor.style.borderBottomRightRadius = "10px";
       const objectFitContain = getComputedStyle(img).objectFit === 'contain'
       if (loadedWidth === 0 || loadedHeight === 0) {
-        infoDivColor.style.backgroundColor = 'grey'
+        infoDivColor.style.backgroundColor = '#DCDCDE'
         infoDivColor.innerHTML =
             'Image loaded later. Resize window to recalculate.'
       } else if (
