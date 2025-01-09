@@ -1,11 +1,22 @@
-if (!('showImagesSizes' in document)) {
+;(() => {
   const infoDivClassName = 'img-info-div-debug'
-  document.infoDivClassName = infoDivClassName
 
+  // Remove info divs
+  const removeInfoDivs = () => {
+    document.querySelectorAll(`.${infoDivClassName}`).forEach((e) => e.remove())
+  }
+
+  // Cleanup function to remove info divs and event listeners
+  const cleanup = () => {
+    removeInfoDivs()
+    window.removeEventListener('resize', debouncedShowImagesSizes)
+    window.removeEventListener('scroll', debouncedShowImagesSizes)
+    chrome.runtime.onMessage.removeListener(messageListener)
+  }
+
+  // Show image sizes
   const showImagesSizes = () => {
-    document.querySelectorAll(`.${infoDivClassName}`).forEach((element) => {
-      element.remove()
-    })
+    removeInfoDivs()
 
     const imgs = document.querySelectorAll('img')
     imgs.forEach((img) => {
@@ -123,6 +134,7 @@ if (!('showImagesSizes' in document)) {
     })
   }
 
+  // Debounce function
   const debounce = (callback, wait) => {
     let timeoutId = null
     return (...args) => {
@@ -133,25 +145,40 @@ if (!('showImagesSizes' in document)) {
     }
   }
 
-  document.showImagesSizes = debounce(showImagesSizes, 100)
-}
+  // Debounce showImagesSizes
+  const debouncedShowImagesSizes = debounce(showImagesSizes, 100)
 
-// would be better to keep this state in sync with the one in background.js,
-// but I don't know how and this works as well.
-if ('showImageSizesActive' in document && document.showImageSizesActive) {
-  document
-    .querySelectorAll(`.${document.infoDivClassName}`)
-    .forEach((e) => e.remove())
+  // setup message listener
+  const messageListener = (request, sender, sendResponse) => {
+    if (request.type === 'TOGGLE_STATE') {
+      if (request.enabled) {
+        debouncedShowImagesSizes()
+        window.addEventListener('resize', debouncedShowImagesSizes)
+        window.addEventListener('scroll', debouncedShowImagesSizes)
+      } else {
+        cleanup()
+      }
+    }
+    sendResponse({ received: true })
+    return true
+  }
 
-  window.removeEventListener('resize', document.showImagesSizes)
-  window.removeEventListener('scroll', document.showImagesSizes)
+  // Set up the listener immediately
+  try {
+    chrome.runtime.onMessage.addListener(messageListener)
+  } catch (error) {
+    console.error('Error registering message listener:', error)
+  }
 
-  document.showImageSizesActive = false
-} else {
-  document.showImagesSizes()
-
-  window.addEventListener('resize', document.showImagesSizes)
-  window.addEventListener('scroll', document.showImagesSizes)
-
-  document.showImageSizesActive = true
-}
+  // Initial state check
+  chrome.runtime.sendMessage({ type: 'GET_ACTIVE_STATE' }, (response) => {
+    if (response) {
+      debouncedShowImagesSizes()
+      window.addEventListener('resize', debouncedShowImagesSizes)
+      window.addEventListener('scroll', debouncedShowImagesSizes)
+    }
+    // else {
+    //   // we don't need to clean up because the old context is still listening to the events
+    // }
+  })
+})()
