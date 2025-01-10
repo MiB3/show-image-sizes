@@ -31,12 +31,12 @@ if (!('showImagesSizes' in document)) {
 
       const infoDivRendered = document.createElement('div')
       infoDivRendered.style.padding = '10px 10px 5px'
-      infoDivRendered.innerHTML = `Rendered: ${renderedWith} x ${renderedHeight}`
+      infoDivRendered.innerHTML = `Rendered: ${renderedWith}&thinsp;&times;&thinsp;${renderedHeight}`
       infoDiv.appendChild(infoDivRendered)
 
       const infoDivLoaded = document.createElement('div')
       infoDivLoaded.style.padding = '5px 10px 10px'
-      infoDivLoaded.innerHTML = `Loaded: ${loadedWidth} x ${loadedHeight}`
+      infoDivLoaded.innerHTML = `Loaded: ${loadedWidth}&thinsp;&times;&thinsp;${loadedHeight}`
       infoDiv.appendChild(infoDivLoaded)
 
       const infoDivColor = document.createElement('div')
