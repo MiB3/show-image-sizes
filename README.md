@@ -1,7 +1,7 @@
 # Show Image Sizes Chrome Extension
 
 This is a Chrome extension which displays on request information about images
-loaded on the page. Especially if they are loaded in the rigt size. This is not
+loaded on the page. Especially if they are loaded in the right size. This is not
 too small and not too big.
 
 ![zuerich_example](./readme_pictures/zuerich_example.png)
