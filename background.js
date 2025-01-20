@@ -18,4 +18,16 @@ chrome.action.onClicked.addListener(async (tab) => {
     target: { tabId: tab.id },
     files: ['showImageSizes.js'],
   })
+
+  if (nextState === 'ON') {
+    chrome.scripting.insertCSS({
+      target: { tabId: tab.id },
+      files: ["showImageSizes.css"],
+    })
+  } else {
+    chrome.scripting.removeCSS({
+      target: { tabId: tab.id },
+      files: ["showImageSizes.css"],
+    })
+  }
 })
