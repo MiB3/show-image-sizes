@@ -1,9 +1,3 @@
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeText({
-    text: '',
-  })
-})
-
 chrome.action.onClicked.addListener(async (tab) => {
   const prevState = await chrome.action.getBadgeText({ tabId: tab.id })
 
