@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Show Image Sizes",
   "description": "Show the sizes of all images on the current website. Also show if they have the right pixel sizes compared to what is displayed.",
-  "version": "1.0",
+  "version": "1.1",
   "background": {
     "service_worker": "background.js",
     "type": "module"
