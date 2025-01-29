@@ -9,4 +9,4 @@ zip -r show-image-sizes.zip \
   LICENSE \
   manifest.json \
   README.md \
-  showImageSize.js
+  showImageSizes.js
