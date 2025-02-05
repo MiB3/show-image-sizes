@@ -8,20 +8,9 @@ if (!('showImagesSizes' in document)) {
     })
 
     const imgs = document.querySelectorAll('img')
-    imgs.forEach((img) => {
+    imgs.forEach((img, index) => {
       const infoDiv = document.createElement('div')
-      infoDiv.style.position = 'absolute'
-      infoDiv.style.top = '0'
-      infoDiv.style.background = 'white'
-      infoDiv.style.color = 'black'
-      infoDiv.style.textAlign = 'left'
-      infoDiv.style.minWidth = '100px'
-      infoDiv.style.maxWidth = '97%'
-      infoDiv.style.borderTop = '1px solid #ddd'
-      infoDiv.style.borderLeft = '1px solid #ddd'
-      infoDiv.style.boxShadow = '4px 4px 10px gray'
-      infoDiv.style.borderBottomRightRadius = '12px'
-      infoDiv.style.zIndex = '9999'
+      infoDiv.style.zIndex = `${99999 - index}`
       infoDiv.classList.add(infoDivClassName)
 
       const renderedWith = img.clientWidth
@@ -30,7 +19,7 @@ if (!('showImagesSizes' in document)) {
       const loadedHeight = img.naturalHeight
 
       const infoDivRendered = document.createElement('div')
-      infoDivRendered.style.padding = '10px 10px 5px'
+      infoDivRendered.classList.add(infoDivClassName + '-rendered')
       infoDivRendered.innerHTML = `Rendered: ${renderedWith}&thinsp;&times;&thinsp;${renderedHeight}`
       infoDiv.appendChild(infoDivRendered)
 

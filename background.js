@@ -8,6 +8,13 @@ chrome.action.onClicked.addListener(async (tab) => {
     text: nextState,
   })
 
+  chrome.scripting.insertCSS({
+    target: {
+      tabId: tab.id,
+    },
+    files: ["showImageSizes.css"],
+  })
+
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     files: ['showImageSizes.js'],

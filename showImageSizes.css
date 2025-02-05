@@ -1,0 +1,29 @@
+.img-info-div-debug {
+  width: unset !important;
+  height: unset !important;
+
+  position: absolute;
+  top: 0;
+  background: white;
+  color: black;
+  textAlign: left;
+  min-width: 100px;
+  max-width: 97%;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  box-shadow: 4px 4px 10px gray;
+  border-bottom-right-radius: 12px;
+
+  &:hover {
+    z-index: 199999 !important;
+  }
+
+  div {
+    width: unset !important;
+    height: unset !important;
+  }
+}
+
+.img-info-div-debug-rendered {
+  padding: 10px 10px 5px;
+}
